@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  ac:
+    build:
+      context: ~/
+      dockerfile: develop/ac/Dockerfile
+    ports:
+      - '2222:22'
+    tty: true
+    container_name: ubuntu
+    volumes:
+      - type: bind
+        source: "/run/host-services/ssh-auth.sock"
+        target: "/tmp/ssh-agent.sock"
+    environment:
+      SSH_AUTH_SOCK: "/tmp/ssh-agent.sock"
