@@ -24,17 +24,19 @@ RUN chsh -s /usr/bin/zsh
 RUN go install github.com/x-motemen/ghq@latest
 ENV GOPATH /root/go
 ENV PATH $PATH:$GOPATH/bin
-RUN echo aa$HOME
 RUN --mount=type=ssh ghq get git@github.com:toshikimiyagawa/dotfiles.git
 RUN --mount=type=ssh ghq get git@github.com:toshikimiyagawa/atcoder-workspace.git
 RUN --mount=type=ssh ghq get git@github.com:atcoder/ac-library.git
+RUN --mount=type=ssh ghq get git@github.com:AstroNvim/AstroNvim.git
 RUN curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 RUN rm .zshrc .zimrc
+RUN mkdir -p /root/.config
 RUN ln -s ghq/github.com/toshikimiyagawa/dotfiles/.zshrc
 RUN ln -s ghq/github.com/toshikimiyagawa/dotfiles/.zimrc
-RUN ln -s ghq/github.com/toshikimiyagawa/dotfiles/.config
 RUN ln -s ghq/github.com/toshikimiyagawa/dotfiles/.fzf.zsh
 RUN ln -s ghq/github.com/toshikimiyagawa/dotfiles/.atcodertools.toml
+RUN ln -s ghq/github.com/toshikimiyagawa/dotfiles/.config/fzf .config/fzf
+RUN ln -s ghq/github.com/toshikimiyagawa/dotfiles/.config/atcoder-tools .config/atcoder-tools
 RUN source /root/.zim/zimfw.zsh install
 
 RUN git config --global user.email "toshi402@gmail.com"

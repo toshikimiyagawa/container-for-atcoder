@@ -2,8 +2,7 @@ version: '3.8'
 services:
   ac:
     build:
-      context: ~/
-      dockerfile: develop/ac/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - '2222:22'
     tty: true
